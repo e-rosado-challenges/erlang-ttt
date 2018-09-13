@@ -1,5 +1,5 @@
 -module(erlang_ttt).
 -export([run/0]).
 
-run() -> 
+run() ->
   "Hello World!".
