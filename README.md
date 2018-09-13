@@ -13,7 +13,13 @@ The following assumes you are using Mac OS X
 + To build `rebar3 compile`
 
 ##Run
-While in the root directory
+While in the root directory:
+`erl -noshell -pa _build/default/lib/erlang_ttt/ebin/ -run erlang_ttt run`
 
-+ erl -noshell -pa _build/default/lib/erlang_ttt/ebin/ -run erlang_ttt run
+## Run Tests
+While in the root directory:
+`rebar3 eunit`
 
+##Run Linter
+While in the root directory:
+`rebar3 as lint lint`
