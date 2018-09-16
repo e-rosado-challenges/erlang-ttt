@@ -1,6 +1,7 @@
 -module(end_game_conditions).
 -export([is_tie_game/1, is_horizontal_win/1,
-         is_vertical_win/1, is_forward_diagonal_win/1]).
+         is_vertical_win/1, is_forward_diagonal_win/1,
+         is_backward_diagonal_win/1]).
 
 is_tie_game([]) -> true;
 is_tie_game([Space|_Spaces]) when is_integer(Space) -> false;
@@ -44,6 +45,18 @@ get_forward_diagonal(Board, BoardLength) ->
   Incrementer = BoardLength - 1,
   StartingPoint = BoardLength,
   EndPoint = length(Board) - Incrementer,
+  Spaces = lists:seq(StartingPoint, EndPoint, Incrementer),
+  lists:map(fun(Space) -> lists:nth(Space, Board) end, Spaces).
+
+is_backward_diagonal_win(Board) ->
+  BoardLength = get_board_length(Board),
+  Diagonal = get_backward_diagonal(Board, BoardLength),
+  is_the_same_marker(Diagonal).
+
+get_backward_diagonal(Board, BoardLength) ->
+  Incrementer = BoardLength + 1,
+  StartingPoint = 1,
+  EndPoint = length(Board),
   Spaces = lists:seq(StartingPoint, EndPoint, Incrementer),
   lists:map(fun(Space) -> lists:nth(Space, Board) end, Spaces).
 

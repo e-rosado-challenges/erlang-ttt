@@ -1,10 +1,11 @@
 -module(end_game_conditions_tests).
 -include_lib("eunit/include/eunit.hrl").
 -compile({nowarn_unused_function, [is_tie_game_test/0, is_horizontal_win_test/0, 
-                                   is_vertical_win_test/0, is_forward_diagonal_win_test/0]}).
+                                   is_vertical_win_test/0, is_forward_diagonal_win_test/0,
+                                   is_backward_diagonal_win_test/0]}).
 
 is_tie_game_test() ->
-  [{"it will return true if there is no winner and all spaces on the board are occupied",
+  [{"it will return true if all spaces on the board are occupied",
     ?assertEqual(true, 
                  end_game_conditions:is_tie_game([x,o,x,x,o,x,o,x,o])),
     ?assertEqual(true, 
@@ -46,15 +47,29 @@ is_vertical_win_test() ->
   }].
 
 is_forward_diagonal_win_test() ->
-  [{"it will return true if there is a vertical win",
+  [{"it will return true if there is a forward diagonal win",
     ?assertEqual(true,
                  end_game_conditions:is_forward_diagonal_win([1,2,x,4,x,6,x,o,o])),
     ?assertEqual(true,
                  end_game_conditions:is_forward_diagonal_win([x,2,o,4,o,6,o,x,x]))
   },
-  {"it will return false if there is not a vertical win",
+  {"it will return false if there is not a forward diagonal win",
     ?assertEqual(false,
                  end_game_conditions:is_forward_diagonal_win([x,2,x,4,5,6,7,o,o])),
     ?assertEqual(false,
                  end_game_conditions:is_forward_diagonal_win([1,o,o,4,x,6,7,x,x]))
+  }].
+
+is_backward_diagonal_win_test() ->
+  [{"it will return true if there is a backward diagonal win",
+    ?assertEqual(true,
+                 end_game_conditions:is_backward_diagonal_win([x,2,3,4,x,6,o,o,x])),
+    ?assertEqual(true,
+                 end_game_conditions:is_backward_diagonal_win([o,2,x,4,o,6,x,x,o]))
+  },
+  {"it will return false if there is not a backward diagonal win",
+    ?assertEqual(false,
+                 end_game_conditions:is_backward_diagonal_win([x,2,x,4,5,6,7,o,o])),
+    ?assertEqual(false,
+                 end_game_conditions:is_backward_diagonal_win([1,o,o,4,x,6,7,x,x]))
   }].
