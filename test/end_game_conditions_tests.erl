@@ -1,6 +1,6 @@
 -module(end_game_conditions_tests).
 -include_lib("eunit/include/eunit.hrl").
--compile({nowarn_unused_function, [is_tie_game_test/0]}).
+-compile({nowarn_unused_function, [is_tie_game_test/0, is_horizontal_win_test/0]}).
 
 is_tie_game_test() ->
   [{"it will return true if there is no winner and all spaces on the board are occupied",
@@ -14,4 +14,18 @@ is_tie_game_test() ->
                  end_game_conditions:is_tie_game([x,o,x,x,o,x,o,8,o])),
     ?assertEqual(false, 
                  end_game_conditions:is_tie_game([1,o,x,x,o,x,o,x,o]))
+  }].
+
+is_horizontal_win_test() ->
+  [{"it will return true if there is a horizontal win",
+    ?assertEqual(true,
+                 end_game_conditions:is_horizontal_win([x,x,x,4,5,6,7,o,o])),
+    ?assertEqual(true,
+                 end_game_conditions:is_horizontal_win([x,x,3,o,o,o,7,x,x]))
+  },
+  {"it will return false if there is not a horizontal win",
+    ?assertEqual(false,
+                 end_game_conditions:is_horizontal_win([x,2,x,4,5,6,7,o,o])),
+    ?assertEqual(false,
+                 end_game_conditions:is_horizontal_win([1,o,o,4,x,6,7,x,x]))
   }].
