@@ -1,7 +1,19 @@
 -module(end_game_conditions).
--export([is_tie_game/1, is_horizontal_win/1,
-         is_vertical_win/1, is_forward_diagonal_win/1,
-         is_backward_diagonal_win/1]).
+-export([is_game_over/1]).
+
+is_game_over(Board) ->
+  GameStatus = {is_horizontal_win(Board), is_vertical_win(Board),
+                is_forward_diagonal_win(Board), is_backward_diagonal_win(Board),
+                is_tie_game(Board)
+               },
+  case GameStatus of
+    {true, _, _, _, _} -> {horizontal_win, true};
+    {_, true, _, _, _} -> {vertical_win, true};
+    {_, _, true, _, _} -> {forward_diagonal_win, true};
+    {_, _, _, true, _} -> {backward_diagonal_win, true};
+    {_, _, _, _, true} -> {tie_game, true};
+    {_, _, _, _, _} -> {no_winner, false}
+  end.
 
 is_tie_game([]) -> true;
 is_tie_game([Space|_Spaces]) when is_integer(Space) -> false;
@@ -60,10 +72,10 @@ get_backward_diagonal(Board, BoardLength) ->
   Spaces = lists:seq(StartingPoint, EndPoint, Incrementer),
   lists:map(fun(Space) -> lists:nth(Space, Board) end, Spaces).
 
-get_board_length(Board) ->
-  Spaces = length(Board),
-  trunc(math:sqrt(Spaces)).
-
 is_the_same_marker([]) -> true;
 is_the_same_marker([Space1, Space2|_Spaces]) when Space1 /= Space2 -> false;
 is_the_same_marker([_Space|Spaces]) -> is_the_same_marker(Spaces).
+
+get_board_length(Board) ->
+  Spaces = length(Board),
+  trunc(math:sqrt(Spaces)).
