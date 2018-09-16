@@ -3,5 +3,5 @@
 
 return_hello_world_test() -> 
   {"it will return 'Hello World!'",
-  ?assertEqual("Hello World!", erlang_ttt:run())
+    ?assertEqual("Hello World!", erlang_ttt:run())
   }.
