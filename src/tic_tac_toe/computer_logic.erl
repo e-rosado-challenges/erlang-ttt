@@ -1,5 +1,5 @@
 -module(computer_logic).
--export([get_available_spaces/2, switch_marker/1]).
+-export([get_available_spaces/2, switch_marker/1, place_marker/3]).
 -define(PLAYER, x).
 -define(COMPUTER, o).
 
@@ -11,3 +11,8 @@ get_available_spaces([], AvailableSpaces) -> AvailableSpaces.
 
 switch_marker(Marker) when Marker =:= ?PLAYER -> ?COMPUTER;
 switch_marker(_Marker) -> ?PLAYER.
+
+place_marker(Board, AvailableSpace, Marker) ->
+  lists:sublist(Board, AvailableSpace - 1)
+         ++ [Marker]
+         ++ lists:nthtail(AvailableSpace, Board).
