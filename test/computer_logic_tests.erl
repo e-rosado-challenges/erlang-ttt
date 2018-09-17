@@ -1,7 +1,8 @@
 -module(computer_logic_tests).
 -include_lib("eunit/include/eunit.hrl").
 -compile({nowarn_unused_function, [get_available_spaces_test/0, switch_marker_test/0,
-                                   place_marker_test/0, get_score_test/0]}).
+                                   place_marker_test/0, get_score_test/0,
+                                   get_board_states_test/0]}).
 
 get_available_spaces_test() ->
   {"it will return available spaces when given a Board.",
@@ -32,15 +33,26 @@ place_marker_test() ->
   }.
 
 get_score_test() ->
-  {"it will return 10 for computer win",
+  [{"it will return 10 for computer win",
     ?assertEqual(10,
-                 computer_logic:get_score([o,o,o,x,x,6,7,8,9], o))
+                 computer_logic:get_score(_Condition = horizontal_win,
+                                          _Marker = o))
   },
   {"it will return -10 for player win",
     ?assertEqual(-10,
-                 computer_logic:get_score([x,x,o,x,o,6,x,8,9], x))
+                 computer_logic:get_score(_Condition = vertical_win,
+                                          _Marker = x))
   },
   {"it will return 0 for a tie",
     ?assertEqual(0,
-                 computer_logic:get_score([x,o,x,x,o,x,o,x,o], x))
+                 computer_logic:get_score(_Condition = tie_game,
+                                          _Marker = o))
+  }].
+
+get_board_states_test() ->
+  {"it will return the remaining board states",
+    ?assertEqual([[x,o,x,x,o,x,o,x,o]],
+                 computer_logic:get_board_states([x,o,x,x,o,x,o,x,9], o)),
+    ?assertEqual([[x,o,3,x,o,x,o,x,x], [x,o,x,x,o,x,o,x,9]],
+                 computer_logic:get_board_states([x,o,3,x,o,x,o,x,9], x))
   }.
