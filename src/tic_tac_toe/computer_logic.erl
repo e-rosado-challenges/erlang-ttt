@@ -1,8 +1,25 @@
 -module(computer_logic).
 -export([get_available_spaces/2, switch_marker/1, place_marker/3,
-        get_score/2, get_board_states/2]).
+        get_score/2, get_board_states/2, get_board_state_score/2]).
 -define(PLAYER, x).
 -define(COMPUTER, o).
+
+get_board_state_score(Board, Marker) ->
+  case end_game_conditions:is_game_over(Board) of
+    {Condition, true} ->
+      WinningMarker = switch_marker(Marker),
+      get_score(Condition, WinningMarker);
+    {no_winner, false} ->
+      BoardStates = get_board_states(Board, Marker),
+      Scores = lists:map(fun(BoardState) ->
+                           NextMarker = switch_marker(Marker),
+                           get_board_state_score(BoardState, NextMarker)
+                         end, BoardStates),
+      case Marker of
+        ?PLAYER -> lists:max(lists:flatten(Scores));
+        ?COMPUTER -> lists:min(lists:flatten(Scores))
+      end
+  end.
 
 get_board_states(Board, Marker) -> get_board_states(Board, Board, [], Marker).
 

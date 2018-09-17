@@ -2,7 +2,7 @@
 -include_lib("eunit/include/eunit.hrl").
 -compile({nowarn_unused_function, [get_available_spaces_test/0, switch_marker_test/0,
                                    place_marker_test/0, get_score_test/0,
-                                   get_board_states_test/0]}).
+                                   get_board_states_test/0, get_board_state_score_test/0]}).
 
 get_available_spaces_test() ->
   {"it will return available spaces when given a Board.",
@@ -55,4 +55,17 @@ get_board_states_test() ->
                  computer_logic:get_board_states([x,o,x,x,o,x,o,x,9], o)),
     ?assertEqual([[x,o,3,x,o,x,o,x,x], [x,o,x,x,o,x,o,x,9]],
                  computer_logic:get_board_states([x,o,3,x,o,x,o,x,9], x))
+  }.
+
+get_board_state_score_test() -> 
+  {"it will return the min or max score for a given board state and marker",
+    ?assertEqual(0,
+                 computer_logic:get_board_state_score(_TieGameBoard = [x,o,x,x,o,x,o,x,9], 
+                                                      _Marker = o)),
+    ?assertEqual(-10,
+                 computer_logic:get_board_state_score(_XWinsBoard = [x,2,x,o,o,x,o,x,o], 
+                                                      _Marker = x)),
+    ?assertEqual(10,
+                 computer_logic:get_board_state_score(_OWinsBoard = [o,x,x,x,o,x,x,o,9], 
+                                                      _Marker = o))
   }.
