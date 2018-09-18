@@ -5,13 +5,7 @@
 
 new_board(Length) ->
   NumberOfSpaces = trunc(math:pow(Length, 2)),
-  build_board(NumberOfSpaces, []).
-
-build_board(NumberOfSpaces, Board) when NumberOfSpaces > 0 ->
-  RemainingNumberOfSpaces = NumberOfSpaces - 1,
-  build_board(RemainingNumberOfSpaces, [NumberOfSpaces|Board]);
-build_board (_NumberOfSpaces, Board) ->
-  Board.
+  lists:seq(1, NumberOfSpaces).
 
 place_marker(Board, AvailableSpace, Marker) ->
   lists:sublist(Board, AvailableSpace - 1)
