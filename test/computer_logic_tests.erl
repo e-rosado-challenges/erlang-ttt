@@ -1,18 +1,6 @@
 -module(computer_logic_tests).
 -include_lib("eunit/include/eunit.hrl").
--compile({nowarn_unused_function, [place_marker_test/0, make_best_move_test/0]}).
-
-place_marker_test() ->
-  {"it will add a new marker to the board on at the designated space",
-    ?assertEqual([x,o,3,4,5,6,7,8,9],
-                 computer_logic:place_marker(_Board = [x,2,3,4,5,6,7,8,9], 
-                                             _AvailableSpace = 2, 
-                                             _Marker = o)),
-    ?assertEqual([x,2,x,x,5,o,7,o,9],
-                 computer_logic:place_marker(_Board = [x,2,x,4,5,o,7,o,9], 
-                                             _AvailableSpace = 4, 
-                                             _Marker = x))
-  }.
+-compile({nowarn_unused_function, [make_best_move_test/0]}).
 
 make_best_move_test() ->
   {"it will block a horizontal win",

@@ -1,7 +1,19 @@
 -module(board_tests).
 -include_lib("eunit/include/eunit.hrl").
--compile({nowarn_unused_function, [switch_marker_test/0, get_board_length_test/0,
-                                   get_available_spaces_test/0]}).
+-compile({nowarn_unused_function, [place_marker_test/0, switch_marker_test/0,
+                                   get_board_length_test/0, get_available_spaces_test/0]}).
+
+place_marker_test() ->
+  {"it will add a new marker to the board on at the designated space",
+    ?assertEqual([x,o,3,4,5,6,7,8,9],
+                 board:place_marker(_Board = [x,2,3,4,5,6,7,8,9],
+                                             _AvailableSpace = 2,
+                                             _Marker = o)),
+    ?assertEqual([x,2,x,x,5,o,7,o,9],
+                 board:place_marker(_Board = [x,2,x,4,5,o,7,o,9],
+                                             _AvailableSpace = 4,
+                                             _Marker = x))
+  }.
 
 switch_marker_test() ->
   {"it will switch the marker to the other available marker",

@@ -1,6 +1,5 @@
 -module(computer_logic).
--export([place_marker/3,
-        get_score/3, get_board_states/2, get_board_state_score/2,
+-export([get_score/3, get_board_states/2, get_board_state_score/2,
         make_best_move/2]).
 -include("board.hrl").
 
@@ -40,7 +39,7 @@ get_board_states(Board, Marker) -> get_board_states(Board, Board, [], Marker).
 get_board_states(_Board, [], BoardStates, _Marker) -> BoardStates;
 get_board_states(Board, [Space|Spaces], BoardStates, Marker)
 when is_integer(Space) ->
-  NewBoardState = place_marker(Board, Space, Marker),
+  NewBoardState = board:place_marker(Board, Space, Marker),
   get_board_states(Board, Spaces, [NewBoardState|BoardStates], Marker);
 get_board_states(Board, [_Space|Spaces], BoardStates, Marker) ->
   get_board_states(Board, Spaces, BoardStates, Marker).
@@ -56,8 +55,3 @@ get_score(Condition, Marker, Board) ->
     {_, ?PLAYER} -> MinimumScore + Depth;
     {_, ?COMPUTER} -> MaximumScore - Depth
   end.
-
-place_marker(Board, AvailableSpace, Marker) ->
-  lists:sublist(Board, AvailableSpace - 1)
-         ++ [Marker]
-         ++ lists:nthtail(AvailableSpace, Board).
