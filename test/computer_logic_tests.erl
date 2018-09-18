@@ -3,7 +3,7 @@
 -compile({nowarn_unused_function, [make_best_move_test/0]}).
 
 make_best_move_test() ->
-  {"it will block a horizontal win",
+  [{"it will block a horizontal win",
     ?assertEqual([x,x,o,4,5,6,7,o,9],
                   computer_logic:make_best_move(_Board = [x,x,3,4,5,6,7,o,9],
                                                _Marker = o))
@@ -42,4 +42,4 @@ make_best_move_test() ->
     ?assertEqual([o,x,3,x,o,6,x,8,o],
                   computer_logic:make_best_move(_Board = [o,x,3,x,o,6,x,8,9],
                                                _Marker = o))
-  }.
+  }].
