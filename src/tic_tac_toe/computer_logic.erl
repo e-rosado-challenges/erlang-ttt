@@ -1,6 +1,5 @@
 -module(computer_logic).
--export([get_score/3, get_board_states/2, get_board_state_score/2,
-        make_best_move/2]).
+-export([make_best_move/2]).
 -include("board.hrl").
 
 make_best_move(Board, Marker) ->
