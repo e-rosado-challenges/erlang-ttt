@@ -1,0 +1,2 @@
+-define(PLAYER, x).
+-define(COMPUTER, o).

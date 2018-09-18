@@ -1,6 +1,15 @@
 -module(board_tests).
 -include_lib("eunit/include/eunit.hrl").
--compile({nowarn_unused_function, [get_board_length_test/0, get_available_spaces_test/0]}).
+-compile({nowarn_unused_function, [switch_marker_test/0, get_board_length_test/0,
+                                   get_available_spaces_test/0]}).
+
+switch_marker_test() ->
+  {"it will switch the marker to the other available marker",
+    ?assertEqual(o,
+                 board:switch_marker(x)),
+    ?assertEqual(x,
+                 board:switch_marker(o))
+  }.
 
 get_board_length_test() ->
   {"it will return the length of a board",

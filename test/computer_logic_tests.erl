@@ -1,15 +1,6 @@
 -module(computer_logic_tests).
 -include_lib("eunit/include/eunit.hrl").
--compile({nowarn_unused_function, [switch_marker_test/0,
-                                   place_marker_test/0, make_best_move_test/0]}).
-
-switch_marker_test() ->
-  {"it will switch the marker to the other available marker",
-    ?assertEqual(o,
-                 computer_logic:switch_marker(x)),
-    ?assertEqual(x,
-                 computer_logic:switch_marker(o))
-  }.
+-compile({nowarn_unused_function, [place_marker_test/0, make_best_move_test/0]}).
 
 place_marker_test() ->
   {"it will add a new marker to the board on at the designated space",

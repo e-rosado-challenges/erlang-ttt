@@ -1,5 +1,9 @@
 -module(board).
--export([get_board_length/1, get_available_spaces/2]).
+-export([switch_marker/1, get_board_length/1, get_available_spaces/2]).
+-include("board.hrl").
+
+switch_marker(Marker) when Marker =:= ?PLAYER -> ?COMPUTER;
+switch_marker(_Marker) -> ?PLAYER.
 
 get_board_length(Board) ->
   Spaces = length(Board),
