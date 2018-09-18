@@ -1,7 +1,17 @@
 -module(board).
--export([place_marker/3, switch_marker/1, get_board_length/1,
+-export([new_board/1, place_marker/3, switch_marker/1, get_board_length/1,
          get_available_spaces/2]).
 -include("board.hrl").
+
+new_board(Length) ->
+  NumberOfSpaces = trunc(math:pow(Length, 2)),
+  build_board(NumberOfSpaces, []).
+
+build_board(NumberOfSpaces, Board) when NumberOfSpaces > 0 ->
+  RemainingNumberOfSpaces = NumberOfSpaces - 1,
+  build_board(RemainingNumberOfSpaces, [NumberOfSpaces|Board]);
+build_board (_NumberOfSpaces, Board) ->
+  Board.
 
 place_marker(Board, AvailableSpace, Marker) ->
   lists:sublist(Board, AvailableSpace - 1)
