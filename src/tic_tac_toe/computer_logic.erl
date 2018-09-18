@@ -5,27 +5,30 @@
 -define(COMPUTER, o).
 
 get_board_state_score(Board, Marker) ->
-  case end_game_conditions:is_game_over(Board) of
-    {Condition, true} ->
-      WinningMarker = switch_marker(Marker),
-      get_score(Condition, WinningMarker);
-    {no_winner, false} ->
-      BoardStates = get_board_states(Board, Marker),
-      Scores = lists:map(fun(BoardState) ->
-                           NextMarker = switch_marker(Marker),
-                           get_board_state_score(BoardState, NextMarker)
-                         end, BoardStates),
-      case Marker of
-        ?PLAYER -> lists:max(lists:flatten(Scores));
-        ?COMPUTER -> lists:min(lists:flatten(Scores))
-      end
-  end.
+  IsGameOver = end_game_conditions:is_game_over(Board),
+  get_board_state_score(Board, Marker, IsGameOver).
+
+get_board_state_score(_Board, Marker, {Condition, GameOver})
+when GameOver =:= true ->
+  WinningMarker = switch_marker(Marker),
+  get_score(Condition, WinningMarker);
+get_board_state_score(Board, Marker, _IsGameOver) ->
+  BoardStates = get_board_states(Board, Marker),
+  Scores = lists:map(fun(BoardState) ->
+                      NextMarker = switch_marker(Marker),
+                      get_board_state_score(BoardState, NextMarker)
+                     end, BoardStates),
+  get_best_score(Scores, Marker).
+
+get_best_score(Scores, Marker) when Marker =:= ?PLAYER ->
+  lists:max(lists:flatten(Scores));
+get_best_score(Scores, _Marker) -> lists:min(lists:flatten(Scores)).
 
 get_board_states(Board, Marker) -> get_board_states(Board, Board, [], Marker).
 
 get_board_states(_Board, [], BoardStates, _Marker) -> BoardStates;
-get_board_states(Board, [Space|Spaces], BoardStates, Marker) when
-                                                           is_integer(Space) ->
+get_board_states(Board, [Space|Spaces], BoardStates, Marker)
+when is_integer(Space) ->
   NewBoardState = place_marker(Board, Space, Marker),
   get_board_states(Board, Spaces, [NewBoardState|BoardStates], Marker);
 get_board_states(Board, [_Space|Spaces], BoardStates, Marker) ->
