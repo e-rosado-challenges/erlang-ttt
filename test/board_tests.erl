@@ -2,7 +2,7 @@
 -include_lib("eunit/include/eunit.hrl").
 -compile({nowarn_unused_function, [new_board_test/0, place_marker_test/0, switch_marker_test/0,
                                    get_board_length_test/0, get_available_spaces_test/0,
-                                   get_rows_test/0]}).
+                                   get_rows_test/0, get_columns_test/0]}).
 
 new_board_test() ->
   {"it will return a new board",
@@ -54,4 +54,20 @@ get_rows_test() ->
                                 _StartingPoint = 1,
                                 _BoardLength = 3,
                                 _Rows = []))
+  }.
+
+get_columns_test() -> 
+  {"it will return the columns of a given board",
+    ?assertEqual([[3,6,9],[2,5,8],[1,4,7]],
+                 board:get_columns(_Board = [1,2,3,4,5,6,7,8,9],
+                                   _StartingPoint = 1,
+                                   _Endpoint = 9,
+                                   _Incrementer = 3,
+                                   _Columns = [])),
+    ?assertEqual([["X",6,9],[2,"O",8],[1,4,"X"]],
+                 board:get_columns(_Board = [1,2,"X",4,"O",6,"X",8,9],
+                                   _StartingPoint = 1,
+                                   _Endpoint = 9,
+                                   _Incrementer = 3,
+                                   _Columns = []))
   }.
