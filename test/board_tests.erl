@@ -12,22 +12,22 @@ new_board_test() ->
 
 place_marker_test() ->
   {"it will add a new marker to the board on at the designated space",
-    ?assertEqual([x,o,3,4,5,6,7,8,9],
-                 board:place_marker(_Board = [x,2,3,4,5,6,7,8,9],
+    ?assertEqual(["X","O",3,4,5,6,7,8,9],
+                 board:place_marker(_Board = ["X",2,3,4,5,6,7,8,9],
                                     _AvailableSpace = 2,
-                                    _Marker = o)),
-    ?assertEqual([x,2,x,x,5,o,7,o,9],
-                 board:place_marker(_Board = [x,2,x,4,5,o,7,o,9],
+                                    _Marker = "O")),
+    ?assertEqual(["X",2,"X","X",5,"O",7,"O",9],
+                 board:place_marker(_Board = ["X",2,"X",4,5,"O",7,"O",9],
                                     _AvailableSpace = 4,
-                                    _Marker = x))
+                                    _Marker = "X"))
   }.
 
 switch_marker_test() ->
   {"it will switch the marker to the other available marker",
-    ?assertEqual(o,
-                 board:switch_marker(x)),
-    ?assertEqual(x,
-                 board:switch_marker(o))
+    ?assertEqual("O",
+                 board:switch_marker("X")),
+    ?assertEqual("X",
+                 board:switch_marker("O"))
   }.
 
 get_board_length_test() ->
@@ -38,9 +38,9 @@ get_board_length_test() ->
 get_available_spaces_test() ->
   {"it will return available spaces when given a Board",
     ?assertEqual([9,8,7,6,5,4,3,2],
-                 board:get_available_spaces([x,2,3,4,5,6,7,8,9], [])),
+                 board:get_available_spaces(["X",2,3,4,5,6,7,8,9], [])),
     ?assertEqual([9,8,6,5,3,2],
-                 board:get_available_spaces([x,2,3,o,5,6,x,8,9], []))
+                 board:get_available_spaces(["X",2,3,o,5,6,"X",8,9], []))
   }.
 
 get_rows_test() ->

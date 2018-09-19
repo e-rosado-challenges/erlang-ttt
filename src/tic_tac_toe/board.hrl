@@ -1,2 +1,2 @@
--define(PLAYER, x).
--define(COMPUTER, o).
+-define(PLAYER, "X").
+-define(COMPUTER, "O").
