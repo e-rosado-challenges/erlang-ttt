@@ -2,7 +2,8 @@
 -include_lib("eunit/include/eunit.hrl").
 -compile({nowarn_unused_function, [new_board_test/0, place_marker_test/0, switch_marker_test/0,
                                    get_board_length_test/0, get_available_spaces_test/0,
-                                   get_rows_test/0, get_columns_test/0]}).
+                                   get_rows_test/0, get_columns_test/0,
+                                   get_forward_diagonal_test/0, get_backward_diagonal_test/0]}).
 
 new_board_test() ->
   {"it will return a new board",
@@ -71,3 +72,23 @@ get_columns_test() ->
                                    _Incrementer = 3,
                                    _Columns = []))
   }.
+
+  get_forward_diagonal_test() ->
+    {"it will return the forward diagonal spaces when given a board",
+      ?assertEqual([3,5,7],
+                 board:get_forward_diagonal(_Board = [1,2,3,4,5,6,7,8,9], 
+                                            _BoardLength = 3)),
+      ?assertEqual(["X",5,7],
+                 board:get_forward_diagonal(_Board = [1,2,"X",4,5,6,7,8,9], 
+                                            _BoardLength = 3))
+    }.
+
+    get_backward_diagonal_test() ->
+    {"it will return the backward diagonal spaces when given a board",
+      ?assertEqual([1,5,9],
+                 board:get_backward_diagonal(_Board = [1,2,3,4,5,6,7,8,9], 
+                                            _BoardLength = 3)),
+      ?assertEqual([1,"X",9],
+                 board:get_backward_diagonal(_Board = [1,2,3,4,"X",6,7,8,9], 
+                                            _BoardLength = 3))
+    }.
