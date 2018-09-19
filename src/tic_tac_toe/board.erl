@@ -26,12 +26,12 @@ get_available_spaces([_Space|Spaces], AvailableSpaces) ->
   get_available_spaces(Spaces, AvailableSpaces);
 get_available_spaces([], AvailableSpaces) -> AvailableSpaces.
 
-get_rows(Board, StartingPoint, TotalLength, Rows)
+get_rows(Board, StartingPoint, BoardLength, Rows)
 when StartingPoint < length(Board)  ->
-  Row = lists:sublist(Board, StartingPoint, TotalLength),
-  NewStartingPoint = StartingPoint + TotalLength,
-  get_rows(Board, NewStartingPoint, TotalLength, [Row| Rows]);
-get_rows(_Board, _StartingPoint, _TotalLength, Rows) -> Rows.
+  Row = lists:sublist(Board, StartingPoint, BoardLength),
+  NewStartingPoint = StartingPoint + BoardLength,
+  get_rows(Board, NewStartingPoint, BoardLength, [Row| Rows]);
+get_rows(_Board, _StartingPoint, _BoardLength, Rows) -> Rows.
 
 get_columns(Board, StartingPoint, EndPoint, Incrementer, Columns)
 when StartingPoint =< Incrementer ->
