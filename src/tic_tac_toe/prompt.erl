@@ -1,5 +1,5 @@
 -module(prompt).
--export([greeting/0, choose_space/0, space_not_available/0,
+-export([greeting/0, choose_space/0, invalid_entry/0,
          win/1, tie/0]).
 
 greeting() ->
@@ -8,8 +8,8 @@ greeting() ->
 choose_space() ->
   "Please choose an empty space, designated by a number.".
 
-space_not_available() ->
-  "The space you have chosen is not available.".
+invalid_entry() ->
+  "Your entry is invalid.".
 
 win(Marker) ->
   Marker ++ " Wins!".
