@@ -5,7 +5,7 @@ get_display_board(Board) ->
   BoardLength = board:get_board_length(Board),
   StartingCell = 1,
   Rows = lists:reverse(
-    end_game_conditions:get_rows(Board, StartingCell, BoardLength, [])
+    board:get_rows(Board, StartingCell, BoardLength, [])
   ),
   build_display_board(BoardLength, Rows, []).
 
