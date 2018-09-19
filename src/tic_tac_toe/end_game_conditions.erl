@@ -1,5 +1,5 @@
 -module(end_game_conditions).
--export([is_game_over/1]).
+-export([is_game_over/1, get_rows/4]).
 
 is_game_over(Board) ->
   GameStatus = {is_horizontal_win(Board), is_vertical_win(Board),
