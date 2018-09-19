@@ -5,7 +5,15 @@
 
 print(Item) -> io:fwrite(Item).
 
-print_greeting() -> print(prompt:print_greeting()).
+print_greeting() -> 
+  print(prompt:greeting()),
+  try io:fread(prompt:start(), "start") of
+    Start -> Start
+  catch
+    error:_ ->
+      invalid_entry(),
+      print_greeting()
+  end.
 
 invalid_entry() -> print(prompt:invalid_entry()).
 
