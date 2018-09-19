@@ -1,11 +1,11 @@
 -module(io_handler).
--export([print/1, print_greeting/0, invalid_entry/0,
+-export([print/1, print_greeting/0, invalid_entry/0, print_board/1,
          print_winner/1, print_tie/0, read_input/1, request_space/1,
          request_space/3, validate_move/3]).
 
 print(Item) -> io:fwrite(Item).
 
-print_greeting() -> 
+print_greeting() ->
   print(prompt:greeting()),
   try io:fread(prompt:start(), "start") of
     Start -> Start
@@ -14,6 +14,8 @@ print_greeting() ->
       invalid_entry(),
       print_greeting()
   end.
+
+print_board(Board) -> print(board_builder:get_display_board(Board)).
 
 invalid_entry() -> print(prompt:invalid_entry()).
 
