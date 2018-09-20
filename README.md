@@ -1,15 +1,20 @@
 # Erlang Tic-Tac-Toe
 
 ## Setup
-The following assumes you are using Mac OS X
+The following assumes you are using macOS
 
+### Homebrew Instructions
 + Install Homebrew `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 + Install Erlang/OTP 21 `brew install erlang@21`
 + Install Rebar3 `brew install rebar3`
 
+### Non-Homebrew User Instructions
++ Install Erlang/OTP 21 `https://www.erlang.org/downloads`
++ Install Rebar3 `https://github.com/erlang/rebar3`
+
 ## Build 
 + Clone the repository `git clone https://github.com/ericdrosado/erlang-ttt`
-+ Change directories into the root directory `cd erlang-ttt/erlang_ttt`
++ Change directories into the root directory `cd erlang-ttt/`
 + To build `rebar3 compile`
 
 ## Run Game
