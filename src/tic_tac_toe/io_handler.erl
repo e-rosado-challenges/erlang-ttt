@@ -5,15 +5,7 @@
 
 print(Item) -> io:fwrite(Item).
 
-print_greeting() ->
-  print(prompt:greeting()),
-  try io:fread(prompt:start(), "start") of
-    Start -> Start
-  catch
-    error:_ ->
-      invalid_entry(),
-      print_greeting()
-  end.
+print_greeting() -> print(prompt:greeting()).
 
 print_board(Board) -> print(board_builder:get_display_board(Board)).
 

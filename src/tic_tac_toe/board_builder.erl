@@ -43,8 +43,8 @@ build_bottom_row(BoardLength, [LeftCell|Cells], Row) when BoardLength > 1 ->
   build_bottom_row(BoardLength - 1, Cells, [UpdatedCell|Row]);
 build_bottom_row(_BoardLength, [RightCell|_Cells], Row)
 when is_integer(RightCell) ->
-  UpdatedCell = " " ++ integer_to_list(RightCell) ++ " ",
+  UpdatedCell = " " ++ integer_to_list(RightCell) ++ " \n",
   lists:concat(lists:reverse([UpdatedCell|Row]));
 build_bottom_row(_BoardLength, [RightCell|_Cells], Row) ->
-  UpdatedCell = " " ++ RightCell ++ " ",
+  UpdatedCell = " " ++ RightCell ++ " \n",
   lists:concat(lists:reverse([UpdatedCell|Row])).

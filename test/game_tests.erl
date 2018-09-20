@@ -4,10 +4,10 @@
 
 initialize_game_test() ->
   [{"it will return 'O Wins!' prompt",
-    ?assertEqual("O Wins!",
+    ?assertEqual("O Wins!\n",
                  game:initialize_game(_View = win_mock_io_handler))
   },
   {"it will return 'Tie Game!' prompt",
-    ?assertEqual("Tie Game!",
+    ?assertEqual("Tie Game!\n",
                  game:initialize_game(_View = tie_mock_io_handler))
   }].

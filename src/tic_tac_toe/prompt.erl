@@ -3,19 +3,19 @@
          win/1, tie/0]).
 
 greeting() ->
-  "Welcome to Tic Tac Toe!".
+  "Welcome to Tic Tac Toe!\n".
 
 start() ->
-  "Please type 'start' and then press enter to begin.".
+  "Please type 'start' and then press enter to begin.\n".
 
 choose_space() ->
-  "Please choose an empty space, designated by a number.".
+  "Please choose an empty space, designated by a number.\n".
 
 invalid_entry() ->
-  "Your entry is invalid.".
+  "Your entry is invalid.\n".
 
 win(Marker) ->
-  Marker ++ " Wins!".
+  Marker ++ " Wins!\n".
 
 tie() ->
-  "Tie Game!".
+  "Tie Game!\n".
