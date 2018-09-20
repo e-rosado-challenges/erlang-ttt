@@ -5,8 +5,9 @@
 
 get_player_move_test() ->
   {"it will return an updated board with player move",
-    ?assertEqual([1,"X",3,4,5,6,7,8,9], 
-                  game:get_player_move(_Board = [1,2,3,4,5,6,7,8,9],
+    ?assertEqual([1,"X",3,4,5,6,7,8,9],
+                  game:get_player_move(_Marker = "X",
+                                       _Board = [1,2,3,4,5,6,7,8,9],
                                        _View = mock_io_handler))
   }.
 
@@ -20,7 +21,8 @@ get_computer_move_test() ->
 play_game_test() ->
   {"it will return 'O Wins!' prompt'",
     ?assertEqual("O Wins!",
-                  game:play_game(_Board = [1,2,3,4,5,6,7,8,9],
+                  game:play_game(_Marker = "X",
+                                 _Board = [1,2,3,4,5,6,7,8,9],
                                  _View = mock_io_handler,
                                  _GameOver = end_game_conditions:is_game_over(
                                               [1,2,3,4,5,6,7,8,9]
@@ -29,7 +31,8 @@ play_game_test() ->
   },
   {"it will return 'Tie Game!' prompt",
     ?assertEqual("Tie Game!",
-                  game:play_game(_Board = ["X","O","X","X","O","X","O",8,9],
+                  game:play_game(_Marker = "X",
+                                 _Board = ["X","O","X","X","O","X","O",8,9],
                                  _View = mock_io_handler,
                                  _GameOver = end_game_conditions:is_game_over(
                                               ["X","O","X","X","O","X","O",8,9]
