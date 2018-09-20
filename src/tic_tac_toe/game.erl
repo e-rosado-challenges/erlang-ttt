@@ -3,4 +3,5 @@
 
 get_player_move(Board, View) ->
   AvailableSpaces = board:get_available_spaces(Board, []),
-  View:request_space(AvailableSpaces).
+  Move = View:request_space(AvailableSpaces),
+  board:place_marker(Board, Move, "X").
