@@ -7,7 +7,8 @@ initialize_game(View) ->
   GameOver = end_game_conditions:is_game_over(Board),
   play_game(Marker, Board, View, GameOver).
 
-play_game(Marker, _Board, View, {Condition, GameOver}) when GameOver ->
+play_game(Marker, Board, View, {Condition, GameOver}) when GameOver ->
+  View:print_board(Board),
   LastActiveMarker = board:switch_marker(Marker),
   case Condition of
     tie_game -> View:print_tie();
