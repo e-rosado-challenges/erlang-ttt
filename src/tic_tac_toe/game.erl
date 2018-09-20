@@ -1,5 +1,6 @@
 -module(game).
 -export([initialize_game/1]).
+-include("board.hrl").
 
 initialize_game(View) ->
   Marker = "X",
@@ -14,14 +15,14 @@ play_game(Marker, Board, View, {Condition, GameOver}) when GameOver ->
     tie_game -> View:print_tie();
     _ -> View:print_winner(LastActiveMarker)
   end;
-play_game(Marker, Board, View, _GameOver) when Marker =:= "X" ->
+play_game(Marker, Board, View, _GameOver) when Marker =:= ?PLAYER ->
   View:print_board(Board),
   PlayerUpdatedBoard = get_player_move(Marker, Board, View),
   ComputerMarker = board:switch_marker(Marker),
   View:clear(),
   play_game(ComputerMarker, PlayerUpdatedBoard, View,
             end_game_conditions:is_game_over(PlayerUpdatedBoard));
-play_game(Marker, Board, View, _GameOver) when Marker =:= "O" ->
+play_game(Marker, Board, View, _GameOver) when Marker =:= ?COMPUTER ->
   ComputerUpdatedBoard = get_computer_move(Board, Marker),
   PlayerMarker = board:switch_marker(Marker),
   play_game(PlayerMarker, ComputerUpdatedBoard, View,
