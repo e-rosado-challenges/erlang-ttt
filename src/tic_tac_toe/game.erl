@@ -1,8 +1,11 @@
 -module(game).
 -export([get_player_move/2, get_computer_move/2, play_game/3]).
 
-play_game(_Board, View, {_Condition, GameOver}) when GameOver ->
-  View:print_winner("O");
+play_game(_Board, View, {Condition, GameOver}) when GameOver ->
+  case Condition of
+    tie_game -> View:print_tie();
+    _ -> View:print_winner("O")
+  end;
 play_game(Board, View, _GameOver) ->
   PlayerUpdatedBoard = get_player_move(Board, View),
   ComputerUpdatedBoard = get_computer_move(PlayerUpdatedBoard, "O"),
