@@ -1,7 +1,7 @@
 -module(game_tests).
 -include_lib("eunit/include/eunit.hrl").
 -compile({nowarn_unused_function, [get_player_move_test/0, get_computer_move_test/0,
-          play_game_test/0]}).
+          play_game_test/0, initialize_game_test/0]}).
 
 get_player_move_test() ->
   {"it will return an updated board with player move",
@@ -38,4 +38,10 @@ play_game_test() ->
                                               ["X","O","X","X","O","X","O",8,9]
                                              )
                                 ))
+  }.
+
+initialize_game_test() ->
+  {"it will return 'O Wins! prompt",
+    ?assertEqual("O Wins!",
+                 game:initialize_game(_View = mock_io_handler))
   }.

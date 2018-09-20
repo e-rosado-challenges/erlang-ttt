@@ -1,5 +1,11 @@
 -module(game).
--export([get_player_move/3, get_computer_move/2, play_game/4]).
+-export([initialize_game/1, get_player_move/3, get_computer_move/2, play_game/4]).
+
+initialize_game(View) ->
+  Marker = "X",
+  Board = board:new_board(3),
+  GameOver = end_game_conditions:is_game_over(Board),
+  play_game(Marker, Board, View, GameOver).
 
 play_game(Marker, _Board, View, {Condition, GameOver}) when GameOver ->
   case Condition of
