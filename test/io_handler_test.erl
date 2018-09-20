@@ -3,7 +3,7 @@
 -compile({nowarn_unused_function, [request_space_test/0]}).
 
 request_space_test() ->
-  {"it will return the user move if it is an integer and is an available space.",
+  [{"it will return the user move if it is an integer and is an available space.",
     ?assertEqual(1, io_handler:request_space(_AvailableSpaces = [1,2,3],
                                              _InputStatus = {ok,["1"]},
                                              _CatchFunction = io_handler:invalid_entry()))
@@ -19,4 +19,4 @@ request_space_test() ->
                  io_handler:request_space(_AvailableSpaces = [1,2,3],
                                           _InputStatus = {ok,["Hello"]},
                                           _CatchFunction = io_handler:invalid_entry()))
-  }.
+  }].

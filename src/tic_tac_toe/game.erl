@@ -1,6 +1,5 @@
 -module(game).
--export([initialize_game/1, get_player_move/3, get_computer_move/2,
-         play_game/4]).
+-export([initialize_game/1]).
 
 initialize_game(View) ->
   Marker = "X",

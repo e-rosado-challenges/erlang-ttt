@@ -1,4 +1,4 @@
--module(mock_io_handler).
+-module(win_mock_io_handler).
 -export([request_space/1, print_winner/1, print_tie/0]).
 
 request_space(AvailableSpaces) ->
