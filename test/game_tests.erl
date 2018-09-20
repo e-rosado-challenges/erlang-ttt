@@ -15,3 +15,10 @@ get_computer_move_test() ->
                   game:get_computer_move(_Board = [1,"X",3,4,5,6,7,8,9],
                                          _Marker = "O"))
   }.
+
+play_game_test() ->
+  {"it will return a board with both player and computer moves",
+    ?assertEqual(["O","X",3,4,5,6,7,8,9],
+                  game:play_game(_Board = [1,2,3,4,5,6,7,8,9],
+                                 _View = mock_io_handler))
+  }.
