@@ -1,7 +1,9 @@
 -module(io_handler).
 -export([print/1, print_greeting/0, invalid_entry/0, print_board/1,
          print_winner/1, print_tie/0, request_space/1,
-         request_space/3, validate_move/4]).
+         request_space/3, validate_move/4, clear/0]).
+
+clear() -> io:format(os:cmd(clear)).
 
 print(Item) -> io:fwrite(Item).
 

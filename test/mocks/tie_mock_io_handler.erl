@@ -1,6 +1,8 @@
 -module(tie_mock_io_handler).
 -export([request_space/1, print_winner/1, print_tie/0,
-         print_board/1]).
+         print_board/1, clear/0]).
+
+clear() -> "".
 
 request_space(AvailableSpaces) ->
   case length(AvailableSpaces) of

@@ -17,6 +17,7 @@ play_game(Marker, Board, View, _GameOver) when Marker =:= "X" ->
   View:print_board(Board),
   PlayerUpdatedBoard = get_player_move(Marker, Board, View),
   ComputerMarker = board:switch_marker(Marker),
+  View:clear(),
   play_game(ComputerMarker, PlayerUpdatedBoard, View,
             end_game_conditions:is_game_over(PlayerUpdatedBoard));
 play_game(Marker, Board, View, _GameOver) when Marker =:= "O" ->
