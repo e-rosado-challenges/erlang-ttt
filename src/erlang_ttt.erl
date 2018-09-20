@@ -2,4 +2,4 @@
 -export([run/0]).
 
 run() ->
-  "Hello World!".
+  game:initialize_game(io_handler).
