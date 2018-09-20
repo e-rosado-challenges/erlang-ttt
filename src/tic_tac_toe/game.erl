@@ -14,6 +14,7 @@ play_game(Marker, _Board, View, {Condition, GameOver}) when GameOver ->
     _ -> View:print_winner(LastActiveMarker)
   end;
 play_game(Marker, Board, View, _GameOver) when Marker =:= "X" ->
+  View:print_board(Board),
   PlayerUpdatedBoard = get_player_move(Marker, Board, View),
   ComputerMarker = board:switch_marker(Marker),
   play_game(ComputerMarker, PlayerUpdatedBoard, View,
