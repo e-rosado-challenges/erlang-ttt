@@ -13,7 +13,7 @@ The following assumes you are using macOS
 + Install Rebar3 `https://github.com/erlang/rebar3`
 
 ## Build 
-+ Clone the repository `git clone https://github.com/ericdrosado/erlang-ttt`
++ Clone the repository `git clone https://github.com/e-rosado-challenges/erlang-ttt.git`
 + Change directories into the root directory `cd erlang-ttt/`
 + To build `rebar3 compile`
 
